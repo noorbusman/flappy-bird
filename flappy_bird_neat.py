@@ -405,7 +405,7 @@ def eval_genomes(genomes, config):
                 ge.pop(birds.index(bird))
                 birds.pop(birds.index(bird))
 
-        draw_window(WIN, birds, pipes, base, score, gen, pipe_ind)
+        draw_window(WIN, birds, pipes, base, score, gen, pipe_ind)     # laat score, hoeveelheid vogels, en gen zien
 
         # eindig loop na score van 25
         if score > 25:
@@ -433,7 +433,7 @@ def run(config_file):
     #p.add_reporter(neat.Checkpointer(5))
 
     # Run for up to 50 generations.
-    winner = p.run(eval_genomes, 5)
+    winner = p.run(eval_genomes, 5)   #maakt van vogeltje dat fitness threshold heeft behaald de "winnaar"
 
     # show final stats
     print('\nBest genome:\n{!s}'.format(winner))
