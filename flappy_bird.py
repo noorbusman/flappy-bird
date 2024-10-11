@@ -317,15 +317,11 @@ def draw_window(win, bird, pipes, base, score):
 
 
 def main(genomes, config):
-    """
-    Runs the main game loop
-    :param win: pygame window surface
-    :return: None
-    """
     nets = []
     ge = []
     birds = []
 
+    # Houdt de genomes bij die de birds aanstuurt 
     for g in genomes: 
         net = neat.nn.FeedForwardNetwork(g.config)
         nets.append(net)
@@ -359,7 +355,7 @@ def main(genomes, config):
                         start = True
                     bird.jump()
 
-        # Move Bird, base and pipes
+        # Beweeg Birds, base en pipes
         if start:
             bird.move()
         if not lost:
@@ -371,7 +367,7 @@ def main(genomes, config):
                 for pipe in pipes:
                     pipe.move()
                     for bird in birds
-                    # check for collision
+                    # check voor collision
                         if pipe.collide(bird, win):
                         lost = True
 
