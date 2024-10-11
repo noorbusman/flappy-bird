@@ -366,10 +366,13 @@ def main(genomes, config):
                 add_pipe = False
                 for pipe in pipes:
                     pipe.move()
-                    for bird in birds
-                    # check voor collision
+                    for x, bird in enumerate(birds):
+                    # check voor collision, haalt fitness af van birds als ze collision hebben
                         if pipe.collide(bird, win):
-                        lost = True
+                        ge [x].fitness -= 1
+                        birds.pop(x)
+                        nets.pop(x)
+                        ge.pop(x)
 
                         if not pipe.passed and pipe.x < birds.x:
                         pipe.passed = True
