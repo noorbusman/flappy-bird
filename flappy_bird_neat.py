@@ -407,10 +407,10 @@ def eval_genomes(genomes, config):
 
         draw_window(WIN, birds, pipes, base, score, gen, pipe_ind)
 
-        # break if score gets large enough
+        # eindig loop na score van 25
         if score > 25:
-            pickle.dump(nets[0],open("best.pickle", "wb"))
-            break
+            pickle.dump(nets[0],open("best.pickle", "wb"))    # kiest "winner" voor pickle
+            break   #stopt de loop
 
 
 def run(config_file):
