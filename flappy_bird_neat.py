@@ -412,8 +412,8 @@ def eval_genomes(genomes, config):
       #???      pickle.dump(nets[0],open("best.pickle", "wb"))    # kiest "winner" voor pickle
             break   #stopt de loop
 
-with open('winner.pickle', 'wb') as f:
-     pickle.dump(winner,f)
+#??? with open('winner.pickle', 'wb') as f:
+ #????    pickle.dump(winner,f)
 
 
 def run(config_file):
@@ -437,7 +437,9 @@ def run(config_file):
 
     # Run for up to 50 generations.
     winner = p.run(eval_genomes, 5)   #maakt van vogeltje dat fitness threshold heeft behaald de "winnaar"
-
+    with open('myData.pkl',wb) as f:
+        pickle.dump(winner,f)
+    
     # show final stats
     print('\nBest genome:\n{!s}'.format(winner))
 
