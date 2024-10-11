@@ -322,6 +322,10 @@ def main(genomes, config):
     :param win: pygame window surface
     :return: None
     """
+    nets = []
+    ge = []
+    birds = []
+    
     bird = Birds(230,350)
     base = Base(FLOOR)
     pipes = [Pipe(700)]
@@ -365,12 +369,12 @@ def main(genomes, config):
                         if pipe.collide(bird, win):
                         lost = True
 
-                    if pipe.x + pipe.PIPE_TOP.get_width() < 0:
-                        rem.append(pipe)
-
-                    if not pipe.passed and pipe.x < birds.x:
+                        if not pipe.passed and pipe.x < birds.x:
                         pipe.passed = True
                         add_pipe = True
+                        
+                 if pipe.x + pipe.PIPE_TOP.get_width() < 0:
+                        rem.append(pipe)
 
                 if add_pipe:
                     score += 1
@@ -379,9 +383,9 @@ def main(genomes, config):
                 for r in rem:
                     pipes.remove(r)
 
-
-        if bird.y + bird_images[0].get_height() - 10 >= FLOOR:
-            break
+        for bird in birds:
+                if bird.y + bird_images[0].get_height() - 10 >= FLOOR:
+                    break
 
         draw_window(WIN, bird, pipes, base, score)
 
