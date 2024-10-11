@@ -350,13 +350,11 @@ def eval_genomes(genomes, config):
         pipe_ind = 0
         if len(birds) > 0:
             if len(pipes) > 1 and birds[0].x > pipes[0].x + pipes[0].PIPE_TOP.get_width(): 
-                pipe_ind = 1     
+                pipe_ind = 1     # deze code zorgt ervoor dat wanneer het vogeltje de pijp voorbij vliegt dat dan de volgende pijp in frame komt
         else: 
             run: False
             break 
-
-
-    # deze code zorgt ervoor dat wanneer het vogeltje de pijp voorbij vliegt dat dan de volgende pijp in frame komt
+# deze "else" zorgt ervoor dat als er geen vogeltjes zijn het spel stopt
 
         
         for x, bird in enumerate(birds):       # geeft vogeltje 0.1 fitness omdat het weer een frame verder is
@@ -366,11 +364,8 @@ def eval_genomes(genomes, config):
             output = nets[birds.index(bird)].activate((bird.y, abs(bird.y - pipes[pipe_ind].height), abs(bird.y - pipes[pipe_ind].bottom)))
 
             if output[0] > 0.5:  
-                bird.jump() 
-
-        
+                bird.jump()    
         # De output stuurt info naar neurale netwerk; als waarde boven 0.5 is dan moet vogeltje springen
-
 
         
         base.move()
