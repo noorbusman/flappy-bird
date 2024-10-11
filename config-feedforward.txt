@@ -1,7 +1,7 @@
 [NEAT]
 fitness_criterion     = max
-fitness_threshold     = 100
-pop_size              = 20
+fitness_threshold     = 100    # verandert naar 100 i.p.v 1000 omdat het eenvoudig spel is en 100 is al "perfect"
+pop_size              = 20     # verandert van 100 naar 20 om meerdere gens te zien en echt neurale netwerken te kunnen zien verbeteren
 reset_on_extinction   = False
 
 [DefaultGenome]
