@@ -12,7 +12,7 @@ import os
 import time
 import neat
 import visualize
-import pickle
+import pickle        #voegt bibliotheek pickle toe om winnaar op te kunnen slaan
 pygame.font.init()  # init font
 
 WIN_WIDTH = 600
@@ -409,8 +409,11 @@ def eval_genomes(genomes, config):
 
         # eindig loop na score van 25
         if score > 25:
-            pickle.dump(nets[0],open("best.pickle", "wb"))    # kiest "winner" voor pickle
+      #???      pickle.dump(nets[0],open("best.pickle", "wb"))    # kiest "winner" voor pickle
             break   #stopt de loop
+
+with open('winner.pickle', 'wb') as f:
+     pickle.dump(winner,f)
 
 
 def run(config_file):
