@@ -316,13 +316,13 @@ def draw_window(win, bird, pipes, base, score):
     pygame.display.update()
 
 
-def main(win):
+def main(genomes, config):
     """
     Runs the main game loop
     :param win: pygame window surface
     :return: None
     """
-    bird = Bird(230,350)
+    bird = Birds(230,350)
     base = Base(FLOOR)
     pipes = [Pipe(700)]
     score = 0
@@ -360,14 +360,15 @@ def main(win):
                 add_pipe = False
                 for pipe in pipes:
                     pipe.move()
+                    for bird in birds
                     # check for collision
-                    if pipe.collide(bird, win):
+                        if pipe.collide(bird, win):
                         lost = True
 
                     if pipe.x + pipe.PIPE_TOP.get_width() < 0:
                         rem.append(pipe)
 
-                    if not pipe.passed and pipe.x < bird.x:
+                    if not pipe.passed and pipe.x < birds.x:
                         pipe.passed = True
                         add_pipe = True
 
@@ -387,6 +388,7 @@ def main(win):
     end_screen(WIN)
 
 main(WIN)
+
 # Laadt de config file in 
 def run(config_path): 
     config = neat.config.Config(neat.DefaultGenome, neat.DefaultReproduction, 
@@ -398,7 +400,7 @@ def run(config_path):
     stats = neat.StatisticsReporter()
     p.add_reporter(stats) 
 
-    winner = p.run(,50) 
+    winner = p.run(main,50) 
 
 if __name__ == "main__":
     local_dir = os.pass.dirname(__file__)
