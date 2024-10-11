@@ -381,16 +381,22 @@ def main(genomes, config):
                  if pipe.x + pipe.PIPE_TOP.get_width() < 0:
                         rem.append(pipe)
 
+                # wanneer een bird door een pipe komt krijgt hij 5 fitness
                 if add_pipe:
                     score += 1
+                    for g in ge:
+                        g.fitness += 5
                     pipes.append(Pipe(WIN_WIDTH))
 
                 for r in rem:
                     pipes.remove(r)
 
-        for bird in birds:
+        # haalt birds weg als ze tegen een pipe aankomen
+        for x, bird in enumerate(birds):
                 if bird.y + bird_images[0].get_height() - 10 >= FLOOR:
-                    break
+                    birds.pop(x)
+                    nets.pop(x)
+                    ge.pop(x)
 
         draw_window(WIN, bird, pipes, base, score)
 
