@@ -323,7 +323,7 @@ def eval_genomes(genomes, config):
     birds = []
     ge = []
     for genome_id, genome in genomes:
-        genome.fitness = 0  # start with fitness level of 0
+        genome.fitness = 0                          # start met een fitness van 0
         net = neat.nn.FeedForwardNetwork.create(genome, config)
         nets.append(net)
         birds.append(Bird(230,350))
@@ -343,24 +343,36 @@ def eval_genomes(genomes, config):
             if event.type == pygame.QUIT:
                 run = False
                 pygame.quit()
-                quit()
+                quit()                 # zorgt ervoor dat niet alleen "loop" stopt maar spel stopt
+
                 break
 
         pipe_ind = 0
         if len(birds) > 0:
-            if len(pipes) > 1 and birds[0].x > pipes[0].x + pipes[0].PIPE_TOP.get_width():  # determine whether to use the first or second
-                pipe_ind = 1                                                                 # pipe on the screen for neural network input
+            if len(pipes) > 1 and birds[0].x > pipes[0].x + pipes[0].PIPE_TOP.get_width(): 
+                pipe_ind = 1     
+        else: 
+            run: False
+            break 
 
-        for x, bird in enumerate(birds):  # give each bird a fitness of 0.1 for each frame it stays alive
-            ge[x].fitness += 0.1
+
+    # deze code zorgt ervoor dat wanneer het vogeltje de pijp voorbij vliegt dat dan de volgende pijp in frame komt
+
+        
+        for x, bird in enumerate(birds):       # geeft vogeltje 0.1 fitness omdat het weer een frame verder is
             bird.move()
-
-            # send bird location, top pipe location and bottom pipe location and determine from network whether to jump or not
+            ge[x].fitness += 0.1
+ 
             output = nets[birds.index(bird)].activate((bird.y, abs(bird.y - pipes[pipe_ind].height), abs(bird.y - pipes[pipe_ind].bottom)))
 
-            if output[0] > 0.5:  # we use a tanh activation function so result will be between -1 and 1. if over 0.5 jump
-                bird.jump()
+            if output[0] > 0.5:  
+                bird.jump() 
 
+        
+        # De output stuurt info naar neurale netwerk; als waarde boven 0.5 is dan moet vogeltje springen
+
+
+        
         base.move()
 
         rem = []
@@ -393,7 +405,7 @@ def eval_genomes(genomes, config):
             pipes.remove(r)
 
         for bird in birds:
-            if bird.y + bird.img.get_height() - 10 >= FLOOR or bird.y < -50:
+            if bird.y + bird.img.get_height() - 10 >= FLOOR or bird.y < -50:    #zorgt ervoor dat vogeltje niet over pijpen heen kan vliegen
                 nets.pop(birds.index(bird))
                 ge.pop(birds.index(bird))
                 birds.pop(birds.index(bird))
@@ -401,9 +413,9 @@ def eval_genomes(genomes, config):
         draw_window(WIN, birds, pipes, base, score, gen, pipe_ind)
 
         # break if score gets large enough
-        '''if score > 20:
+        if score > 25:
             pickle.dump(nets[0],open("best.pickle", "wb"))
-            break'''
+            break
 
 
 def run(config_file):
