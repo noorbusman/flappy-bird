@@ -387,7 +387,7 @@ def main(win):
     end_screen(WIN)
 
 main(WIN)
-
+# Laadt de config file in 
 def run(config_path): 
     config = neat.config.Config(neat.DefaultGenome, neat.DefaultReproduction, 
                                 neat.DefaultSpeciesSet, neat.DefaultStagnation, 
