@@ -325,8 +325,14 @@ def main(genomes, config):
     nets = []
     ge = []
     birds = []
+
+    for g in genomes: 
+        net = neat.nn.FeedForwardNetwork(g.config)
+        nets.append(net)
+        birds.append(Bird(230, 350))
+        ge.append.(g)
+        g.fitness = 0
     
-    bird = Birds(230,350)
     base = Base(FLOOR)
     pipes = [Pipe(700)]
     score = 0
