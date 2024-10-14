@@ -68,12 +68,12 @@ class Bird:
 
     def move(self):
         """
-        # beweegt de bird 
+        make the bird move 
         :return: None
         """
         self.tick_count += 1
 
-        # voor neerwaardse versnelling 
+        # for downwards acceleration 
         displacement = self.vel*(self.tick_count) + 0.5*(3)*(self.tick_count)**2  # calculate displacement
 
         # eindsnelheid 
@@ -94,13 +94,13 @@ class Bird:
 
     def draw(self, win):
         """
-        # teken de bird
+        draw the bird
         :param win: pygame window or surface
         :return: None
         """
         self.img_count += 1
 
-        # voor animatie van de bird, ren door drie frames 
+           # For animation of bird, loop through three images 
         if self.img_count <= self.ANIMATION_TIME:
             self.img = self.IMGS[0]
         elif self.img_count <= self.ANIMATION_TIME*2:
@@ -134,7 +134,7 @@ class Pipe():
     """
     represents a pipe object
     """
-    GAP = 160
+    GAP = 160           # zoals in opdracht
     VEL = 5
 
     def __init__(self, x):
@@ -287,7 +287,7 @@ class Base:
                  pygame.draw.line(win, (255,0,0), (bird.x+bird.img.get_width()/2, bird.y + bird.img.get_height()/2), (pipes[pipe_ind].x + pipes[pipe_ind].PIPE_BOTTOM.get_width()/2, pipes[pipe_ind].bottom), 5)
              except:
                  pass
-         # teken bird
+         # draw bird
          bird.draw(win)
 
      # score
@@ -335,7 +335,7 @@ class Base:
 
     run = True
     while run and len(birds) > 0:
-        clock.tick(100) 
+        clock.tick(100)                            # framerate 100 gemaakt i.p.v 60
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -408,42 +408,42 @@ class Base:
                                                                        # eindig loop na score van 25
         if score > 25:  
            pickle.dump(nets[0],open("best.pickle", "wb"))    # kiest "winner" voor pickle
-            break   #stopt de loop
-                            # with open('winner.pickle', 'wb') as f:
-                            #  pickle.dump(winner,f) 
+            break           # stopt de loop
+                            # with open('winner.pickle', 'wb') as f: (pickle poging)
+                            # pickle.dump(winner,f)                  (pickle poging)
 
 
-# Laadt de config file in 
-def run(config_file):
-    """
-    runs the NEAT algorithm to train a neural network to play flappy bird.
-    :param config_file: location of config file
-    :return: None
-    """
-    config = neat.config.Config(neat.DefaultGenome, neat.DefaultReproduction,
+                            # Laadt de config file in 
+  def run(config_path):
+      """
+      runs the NEAT algorithm to train a neural network to play flappy bird.
+      :param config_file: location of config file
+      :return: None
+      """
+      config = neat.config.Config(neat.DefaultGenome, neat.DefaultReproduction,
                          neat.DefaultSpeciesSet, neat.DefaultStagnation,
-                         config_file)
+                         config_path)    # config instellen
 
-    # Create the population, which is the top-level object for a NEAT run.
-    p = neat.Population(config)
+      # populatie creëren
+      p = neat.Population(config)
 
-    # Add a stdout reporter to show progress in the terminal.
-    p.add_reporter(neat.StdOutReporter(True))
-    stats = neat.StatisticsReporter()
-    p.add_reporter(stats)
-    #p.add_reporter(neat.Checkpointer(5))
+      # Add a stdout reporter to show progress in the terminal.
+      p.add_reporter(neat.StdOutReporter(True))
+      stats = neat.StatisticsReporter()
+      p.add_reporter(stats)
+      #p.add_reporter(neat.Checkpointer(5))
 
-    # Run for up to 50 generations.
-    winner = p.run(eval_genomes, 50)   #maakt van vogeltje dat fitness threshold heeft behaald de "winnaar"
+      # 25 generaties runnen
+      winner = p.run(eval_genomes, 25)   #maakt van vogeltje dat fitness threshold heeft behaald de "winnaar"
     
-    # show final stats
-    print('\nBest genome:\n{!s}'.format(winner))
+      # score laten zien
+      print('\nBest genome:\n{!s}'.format(winner))
 
 
-if __name__ == '__main__':
-    # Determine path to configuration file. This path manipulation is here so that the script will run successfully regardless of dehuidige werkdirectory 
-    local_dir = os.path.dirname(__file__)
-    config_path = os.path.join(local_dir, 'config-feedforward.txt')
-    run(config_path)
+    if __name__ == '__main__':
+      # Determine path to configuration file. This path manipulation is here so that the script will run successfully regardless of dehuidige werkdirectory 
+      local_dir = os.path.dirname(__file__)       # laat config laden uit locaal dictionary
+      config_path = os.path.join(local_dir, 'config-feedforward.txt')     # zet de config_path om in file
+      run(config_path)
 
 
