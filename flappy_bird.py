@@ -285,7 +285,7 @@ class Base:
         pygame.quit()
         quit()
 
-    def draw_window(win, bird, pipes, base, score):
+    def draw_window(win, birds, pipes, base, score):
         """
         # tekent de windows voor het primaire spel rondje 
         :param win: pygame window surface
@@ -300,7 +300,8 @@ class Base:
             pipe.draw(win)
 
         base.draw(win)
-        bird.draw(win)
+        for bird in birds:
+            bird.draw(win)
 
         # score
         score_label = STAT_FONT.render("Score: " + str(score),1,(255,255,255))
@@ -315,8 +316,8 @@ class Base:
         birds = []
 
         # Houdt de genomes bij die de birds aanstuurt 
-        for g in genomes: 
-            net = neat.nn.FeedForwardNetwork(g, config)
+        for _, g in genomes: 
+            net = neat.nn.FeedForwardNetwork.create(g, config)
             nets.append(net)
             birds.append(Bird(230, 350))
             ge.append.(g)
@@ -373,6 +374,9 @@ class Base:
                         
                  if pipe.x + pipe.PIPE_TOP.get_width() < 0:
                         rem.append(pipe)
+                else: 
+                    run = False 
+                    break 
 
                 # wanneer een bird door een pipe komt krijgt hij 5 fitness
                 if add_pipe:
@@ -391,11 +395,10 @@ class Base:
                     nets.pop(x)
                     ge.pop(x)
 
-        draw_window(WIN, bird, pipes, base, score)
+        draw_window(WIN, birds, pipes, base, score)
 
     end_screen(WIN)
 
-main(WIN)
 
     # Laadt de config file in 
     def run(config_path): 
