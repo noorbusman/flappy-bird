@@ -134,8 +134,8 @@ class Pipe():
     """
     represents a pipe object
     """
-    GAP = 160           # zoals in opdracht
-    VEL = 5
+    GAP = 160           #1 GAP 160 gemaakt 
+    VEL = 5             #2 VEL 5 gemaakt 
 
     def __init__(self, x):
         """
@@ -210,7 +210,7 @@ class Base:
     """
     Represnts the moving floor of the game
     """
-    VEL = 5
+    VEL = 5                  
     WIDTH = base_img.get_width()
     IMG = base_img
 
@@ -304,7 +304,7 @@ class Base:
 
     pygame.display.update()
 
-  # veranderingen voor de fitness functie 
+  #3 veranderingen voor de fitness functie 
   def eval_genomes(genomes, config):
      """
      runs the simulation of the current population of
@@ -323,13 +323,13 @@ class Base:
      ge = []
       
 # for genome_id, genome in genomes:
-        genome.fitness = 0                          # start met een fitness van 0
+        genome.fitness = 0                          #4 start met een fitness van 0
         net = neat.nn.FeedForwardNetwork.create(genome, config)
         nets.append(net)
         birds.append(Bird(230,350))
         ge.append(genome)
 
-# de fitness van elke vogel wordt bekeken 
+#4 de fitness van elke vogel wordt bekeken 
    with open('best.pickle', 'rb') as handle:
         net=pickle.load(handle)
     nets.append(net)
@@ -344,26 +344,26 @@ class Base:
 
     run = True
     while run and len(birds) > 0:
-        clock.tick(100)                            # framerate 100 gemaakt i.p.v 60
+        clock.tick(100)                            #5 framerate 100 gemaakt i.p.v 60
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
                 pygame.quit()
-                quit()                              # zorgt ervoor dat niet alleen "loop" stopt maar spel stopt
+                quit()                              #6 zorgt ervoor dat niet alleen "loop" stopt maar spel stopt
                 break
 
         pipe_ind = 0
         if len(birds) > 0:
             if len(pipes) > 1 and birds[0].x > pipes[0].x + pipes[0].PIPE_TOP.get_width(): 
-                pipe_ind = 1     # deze code zorgt ervoor dat wanneer het vogeltje de pijp voorbij vliegt dat dan de volgende pijp in frame komt
+                pipe_ind = 1     #5 deze code zorgt ervoor dat wanneer het vogeltje de pijp voorbij vliegt dat dan de volgende pijp in frame komt
         else: 
             run: False
             break 
-                                                    # deze "else" zorgt ervoor dat als er geen vogeltjes zijn het spel stopt
+                                                    #7 deze "else" zorgt ervoor dat als er geen vogeltjes zijn het spel stopt
 
         
-        for x, bird in enumerate(birds):            # geeft vogeltje 0.1 fitness omdat het weer een frame verder is
+        for x, bird in enumerate(birds):            #8 geeft vogeltje 0.1 fitness omdat het weer een frame verder is
             bird.move()
             ge[x].fitness += 0.1
  
@@ -371,7 +371,7 @@ class Base:
 
             if output[0] > 0.5:  
                 bird.jump()    
-        # De output stuurt info naar neurale netwerk; als waarde boven 0.5 is dan moet vogeltje springen
+        #9 De output stuurt info naar neurale netwerk; als waarde boven 0.5 is dan moet vogeltje springen
 
         
         base.move()
@@ -380,7 +380,7 @@ class Base:
         add_pipe = False
         for pipe in pipes:
             pipe.move()
-            # check voor collision, haalt fitness af van birds als ze collision hebben
+            #10 check voor collision, haalt fitness af van birds als ze collision hebben
             for bird in birds:
                 if pipe.collide(bird, win):
                     ge[birds.index(bird)].fitness -= 1
@@ -397,7 +397,7 @@ class Base:
 
         if add_pipe:
             score += 1
-           # wanneer een bird door een pipe komt krijgt hij 5 fitness
+           #11 wanneer een bird door een pipe komt krijgt hij 5 fitness
             for genome in ge:
                 genome.fitness += 5
             pipes.append(Pipe(WIN_WIDTH))
@@ -407,22 +407,22 @@ class Base:
 
         
         for bird in birds:
-            if bird.y + bird.img.get_height() - 10 >= FLOOR or bird.y < -50:    #zorgt ervoor dat vogeltje niet over pijpen heen kan vliegen
+            if bird.y + bird.img.get_height() - 10 >= FLOOR or bird.y < -50:    #12 zorgt ervoor dat vogeltje niet over pijpen heen kan vliegen
                 nets.pop(birds.index(bird))
                 ge.pop(birds.index(bird))
                 birds.pop(birds.index(bird))
 
-        draw_window(WIN, birds, pipes, base, score, gen, pipe_ind)     # laat score, hoeveelheid vogels, en gen zien
+        draw_window(WIN, birds, pipes, base, score, gen, pipe_ind)     #13 laat score, hoeveelheid vogels, en gen zien
 
-                                                                       # eindig loop na score van 25
+                                                                       #14 eindig loop na score van 25
         if score > 25:  
-           pickle.dump(nets[0],open("best.pickle", "wb"))    # kiest "winner" voor pickle
-            break           # stopt de loop
-                            # with open('winner.pickle', 'wb') as f: (pickle poging)
-                            # pickle.dump(winner,f)                  (pickle poging)
+           pickle.dump(nets[0],open("best.pickle", "wb"))    #15 kiest "winner" voor pickle
+            break           #16 stopt de loop
+                            #17 with open('winner.pickle', 'wb') as f: (pickle poging)
+                            #18 pickle.dump(winner,f)                  (pickle poging)
 
 
-                            # Laadt de config file in 
+                            #19 Laadt de config file in 
   def run(config_path):
       """
       runs the NEAT algorithm to train a neural network to play flappy bird.
@@ -433,7 +433,7 @@ class Base:
                          neat.DefaultSpeciesSet, neat.DefaultStagnation,
                          config_path)    # config instellen
 
-      # populatie creëren
+      #20 populatie creëren
       p = neat.Population(config)
 
       # Add a stdout reporter to show progress in the terminal.
@@ -442,10 +442,10 @@ class Base:
       p.add_reporter(stats)
       #p.add_reporter(neat.Checkpointer(5))
 
-      # 25 generaties runnen
-      winner = p.run(eval_genomes, 25)   #maakt van vogeltje dat fitness threshold heeft behaald de "winnaar"
+      #21 25 generaties runnen
+      winner = p.run(eval_genomes, 25)   #22 maakt van vogeltje dat fitness threshold heeft behaald de "winnaar"
     
-      # score laten zien
+      #23 score laten zien
       print('\nBest genome:\n{!s}'.format(winner))
 
 
