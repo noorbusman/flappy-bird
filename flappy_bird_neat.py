@@ -287,20 +287,20 @@ class Base:
                   pygame.draw.line(win, (255,0,0), (bird.x+bird.img.get_width()/2, bird.y + bird.img.get_height()/2), (pipes[pipe_ind].x + pipes[pipe_ind].PIPE_BOTTOM.get_width()/2, pipes[pipe_ind].bottom), 5)
               except:
                  pass
-     # draw bird
-     bird.draw(win)
+       # draw bird
+       bird.draw(win)
 
-     # score
-     score_label = STAT_FONT.render("Score: " + str(score),1,(255,255,255))
-     win.blit(score_label, (WIN_WIDTH - score_label.get_width() - 15, 10))
-
-     # generations
-     score_label = STAT_FONT.render("Gens: " + str(gen-1),1,(255,255,255))
-     win.blit(score_label, (10, 10))
-
-     # alive
-     score_label = STAT_FONT.render("Alive: " + str(len(birds)),1,(255,255,255))
-     win.blit(score_label, (10, 50))
+       # score
+       score_label = STAT_FONT.render("Score: " + str(score),1,(255,255,255))
+       win.blit(score_label, (WIN_WIDTH - score_label.get_width() - 15, 10))
+    
+       # generations
+       score_label = STAT_FONT.render("Gens: " + str(gen-1),1,(255,255,255))
+       win.blit(score_label, (10, 10))
+    
+       # alive
+       score_label = STAT_FONT.render("Alive: " + str(len(birds)),1,(255,255,255))
+       win.blit(score_label, (10, 50))
 
     pygame.display.update()
 
