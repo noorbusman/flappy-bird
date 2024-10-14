@@ -371,7 +371,7 @@ class Base:
         add_pipe = False
         for pipe in pipes:
             pipe.move()
-            # check for collision
+            # check voor collision, haalt fitness af van birds als ze collision hebben
             for bird in birds:
                 if pipe.collide(bird, win):
                     ge[birds.index(bird)].fitness -= 1
@@ -388,7 +388,7 @@ class Base:
 
         if add_pipe:
             score += 1
-            # can add this line to give more reward for passing through a pipe (not required)
+           # wanneer een bird door een pipe komt krijgt hij 5 fitness
             for genome in ge:
                 genome.fitness += 5
             pipes.append(Pipe(WIN_WIDTH))
@@ -413,6 +413,7 @@ class Base:
                             #  pickle.dump(winner,f) 
 
 
+# Laadt de config file in 
 def run(config_file):
     """
     runs the NEAT algorithm to train a neural network to play flappy bird.
