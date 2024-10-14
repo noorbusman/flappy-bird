@@ -335,7 +335,7 @@ class Base:
 
     run = True
     while run and len(birds) > 0:
-        clock.tick(60)
+        clock.tick(100) 
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
