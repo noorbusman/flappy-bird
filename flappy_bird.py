@@ -1,10 +1,3 @@
-"""
-The classic game of flappy bird. Made with python
-and pygame. Features pixel perfect collision using masks :o
-
-Date Modified:  Jul 30, 2019
-Author: Tech With Tim
-"""
 import pygame
 import random
 import os
@@ -28,7 +21,7 @@ base_img = pygame.transform.scale2x(pygame.image.load(os.path.join("imgs","base.
 
 class Bird:
     """
-    Bird class representing the flappy bird
+    # Bird class vertegenwoordigd de flappy bird
     """
     WIN_HEIGHT = 0
     WIN_WIDTH = 0
@@ -39,7 +32,7 @@ class Bird:
 
     def __init__(self, x, y):
         """
-        Initialize the object
+        # Start het object
         :param x: starting x pos (int)
         :param y: starting y pos (int)
         :return: None
@@ -56,7 +49,7 @@ class Bird:
 
     def jump(self):
         """
-        make the bird jump
+        # de bird springt
         :return: None
         """
         self.vel = -10.5
@@ -65,7 +58,7 @@ class Bird:
 
     def move(self):
         """
-        make the bird move
+        # laat de bird bewegen 
         :return: None
         """
         self.tick_count += 1
@@ -91,7 +84,7 @@ class Bird:
 
     def draw(self, win):
         """
-        draw the bird
+        # tekent de bird
         :param win: pygame window or surface
         :return: None
         """
@@ -110,18 +103,18 @@ class Bird:
             self.img = self.IMGS[0]
             self.img_count = 0
 
-        # so when bird is nose diving it isn't flapping
+        # wanneer de bird aan het kelderen is de bird niet aan het flapperen 
         if self.tilt <= -80:
             self.img = self.IMGS[1]
             self.img_count = self.ANIMATION_TIME*2
 
 
-        # tilt the bird
+        # kantelt de bird
         blitRotateCenter(win, self.img, (self.x, self.y), self.tilt)
 
     def get_mask(self):
         """
-        gets the mask for the current image of the bird
+        # haalt het masker voor het actuele plaatje van de bird
         :return: None
         """
         return pygame.mask.from_surface(self.img)
@@ -129,7 +122,7 @@ class Bird:
 
 class Pipe():
     """
-    represents a pipe object
+    # representeerd een pipe object 
     """
     WIN_HEIGHT = WIN_HEIGHT
     WIN_WIDTH = WIN_WIDTH
@@ -138,7 +131,7 @@ class Pipe():
 
     def __init__(self, x):
         """
-        initialize pipe object
+        # start het pipe object
         :param x: int
         :param y: int
         :return" None
@@ -147,7 +140,7 @@ class Pipe():
         self.height = 0
         self.gap = 100  # gap between top and bottom pipe
 
-        # where the top and bottom of the pipe is
+        # waar de bovenkant en onderkant van de pipe is 
         self.top = 0
         self.bottom = 0
 
@@ -160,7 +153,7 @@ class Pipe():
 
     def set_height(self):
         """
-        set the height of the pipe, from the top of the screen
+        # stelt de hoogte van de pipe in, van de bovenkant van het scherm
         :return: None
         """
         self.height = random.randrange(50, 450)
@@ -169,7 +162,7 @@ class Pipe():
 
     def move(self):
         """
-        move pipe based on vel
+        # verplaatst de pipe gebaseerd op vel
         :return: None
         """
         self.x -= self.VEL
