@@ -415,12 +415,12 @@ def eval_genomes(genomes, config):
                                                                         #??? with open('winner.pickle', 'wb') as f:
                                                                         #????    pickle.dump(winner,f)
 
-def pickle(myData.pkl)
+                                         #def pickle(myData.pkl)
 
     if score > 25:
         with open('myData.pkl','rb') as f2: 
-            a=pickle.load(f2)
-            print(a)
+          #    a=pickle.load(f2)
+          #    print(a)
 
 
 def run(config_file):
