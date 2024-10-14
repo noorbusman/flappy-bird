@@ -256,10 +256,10 @@ class Base:
        :param angle: a float value for angle
        :return: None
        """
-      rotated_image = pygame.transform.rotate(image, angle)
-      new_rect = rotated_image.get_rect(center = image.get_rect(topleft = topleft).center)
+         rotated_image = pygame.transform.rotate(image, angle)
+         new_rect = rotated_image.get_rect(center = image.get_rect(topleft = topleft).center)
 
-      surf.blit(rotated_image, new_rect.topleft)
+         surf.blit(rotated_image, new_rect.topleft)
 
    def draw_window(win, birds, pipes, base, score, gen, pipe_ind):
       """
@@ -267,7 +267,7 @@ class Base:
       :param win: pygame window surface
       :param bird: a Bird object
       :param pipes: List of pipes
-      :param score: score of the game (int)
+      :param score: score of the game (int)    	    	                
       :param gen: current generation
       :param pipe_ind: index of closest pipe
        """
