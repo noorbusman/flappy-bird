@@ -247,34 +247,33 @@ class Base:
         win.blit(self.IMG, (self.x2, self.y))
 
 
-def blitRotateCenter(surf, image, topleft, angle):
-    """
-    Rotate a surface and blit it to the window
-    :param surf: the surface to blit to
-    :param image: the image surface to rotate
-    :param topLeft: the top left position of the image
-    :param angle: a float value for angle
-    :return: None
-    """
-    rotated_image = pygame.transform.rotate(image, angle)
-    new_rect = rotated_image.get_rect(center = image.get_rect(topleft = topleft).center)
+    def blitRotateCenter(surf, image, topleft, angle):
+        """
+       Rotate a surface and blit it to the window
+       :param surf: the surface to blit to
+       :param image: the image surface to rotate
+       :param topLeft: the top left position of the image
+       :param angle: a float value for angle
+       :return: None
+       """
+       rotated_image = pygame.transform.rotate(image, angle)
+       new_rect = rotated_image.get_rect(center = image.get_rect(topleft = topleft).center)
 
-    surf.blit(rotated_image, new_rect.topleft)
+       surf.blit(rotated_image, new_rect.topleft)
 
-def draw_window(win, birds, pipes, base, score, gen, pipe_ind):
-    """
-    draws the windows for the main game loop
-    :param win: pygame window surface
-    :param bird: a Bird object
-    :param pipes: List of pipes
-    :param score: score of the game (int)
-    :param gen: current generation
-    :param pipe_ind: index of closest pipe
-    :return: None
-    """
-    if gen == 0:
-        gen = 1
-    win.blit(bg_img, (0,0))
+   def draw_window(win, birds, pipes, base, score, gen, pipe_ind):
+      """
+      draws the windows for the main game loop
+      :param win: pygame window surface
+      :param bird: a Bird object
+      :param pipes: List of pipes
+      :param score: score of the game (int)
+      :param gen: current generation
+      :param pipe_ind: index of closest pipe
+       """
+       if gen == 0:
+          gen = 1
+         win.blit(bg_img, (0,0))
 
     for pipe in pipes:
         pipe.draw(win)
