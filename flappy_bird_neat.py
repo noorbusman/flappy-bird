@@ -433,9 +433,7 @@ def run(config_file):
     #p.add_reporter(neat.Checkpointer(5))
 
     # Run for up to 50 generations.
-    winner = p.run(eval_genomes, 5)   #maakt van vogeltje dat fitness threshold heeft behaald de "winnaar"
-    with open('myData.pkl',wb) as f:   #pickle geprobeerd toe te voegen
-        pickle.dump(winner,f)
+    winner = p.run(eval_genomes, 50)   #maakt van vogeltje dat fitness threshold heeft behaald de "winnaar"
     
     # show final stats
     print('\nBest genome:\n{!s}'.format(winner))
