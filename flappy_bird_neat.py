@@ -271,9 +271,9 @@ class Base:
        :param gen: current generation
        :param pipe_ind: index of closest pipe
        """
-        if gen == 0:
-        gen = 1
-        win.blit(bg_img, (0,0))
+       if gen == 0:
+         gen = 1
+         win.blit(bg_img, (0,0))
 
      for pipe in pipes:
          pipe.draw(win)
