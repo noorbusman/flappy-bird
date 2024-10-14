@@ -342,7 +342,6 @@ class Base:
                 run = False
                 pygame.quit()
                 quit()                              # zorgt ervoor dat niet alleen "loop" stopt maar spel stopt
-
                 break
 
         pipe_ind = 0
@@ -397,6 +396,7 @@ class Base:
         for r in rem:
             pipes.remove(r)
 
+        
         for bird in birds:
             if bird.y + bird.img.get_height() - 10 >= FLOOR or bird.y < -50:    #zorgt ervoor dat vogeltje niet over pijpen heen kan vliegen
                 nets.pop(birds.index(bird))
@@ -406,19 +406,11 @@ class Base:
         draw_window(WIN, birds, pipes, base, score, gen, pipe_ind)     # laat score, hoeveelheid vogels, en gen zien
 
                                                                        # eindig loop na score van 25
-        if score > 25:
-                                                                       #???      pickle.dump(nets[0],open("best.pickle", "wb"))    # kiest "winner" voor pickle
+        if score > 25:  
+           pickle.dump(nets[0],open("best.pickle", "wb"))    # kiest "winner" voor pickle
             break   #stopt de loop
-
-                                                                        #??? with open('winner.pickle', 'wb') as f:
-                                                                        #????    pickle.dump(winner,f)
-
-                                         #def pickle(myData.pkl)
-
-    if score > 25:
-        with open('myData.pkl','rb') as f2: 
-          #    a=pickle.load(f2)
-          #    print(a)
+                            # with open('winner.pickle', 'wb') as f:
+                            #  pickle.dump(winner,f) 
 
 
 def run(config_file):
