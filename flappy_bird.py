@@ -241,108 +241,108 @@ class Base:
         win.blit(self.IMG, (self.x2, self.y))
 
 
-def blitRotateCenter(surf, image, topleft, angle):
-    """
-    # kantelt een oppervlak en het blijft bij de window
-    :param surf: the surface to blit to
-    :param image: the image surface to rotate
-    :param topLeft: the top left position of the image
-    :param angle: a float value for angle
-    :return: None
-    """
-    rotated_image = pygame.transform.rotate(image, angle)
-    new_rect = rotated_image.get_rect(center = image.get_rect(topleft = topleft).center)
+    def blitRotateCenter(surf, image, topleft, angle):
+        """
+        # kantelt een oppervlak en het blijft bij de window
+        :param surf: the surface to blit to
+        :param image: the image surface to rotate
+        :param topLeft: the top left position of the image
+        :param angle: a float value for angle
+        :return: None
+        """
+        rotated_image = pygame.transform.rotate(image, angle)
+        new_rect = rotated_image.get_rect(center = image.get_rect(topleft = topleft).center)
 
-    surf.blit(rotated_image, new_rect.topleft)
+        surf.blit(rotated_image, new_rect.topleft)
 
-def menu_screen(win):
-    """
-    # het menu scherm begint het spel
-    :param win: the pygame window surface
-    :return: None
-    """
-    pass
+    def menu_screen(win):
+        """
+        # het menu scherm begint het spel
+        :param win: the pygame window surface
+        :return: None
+        """
+        pass
 
-def end_screen(win):
-    """
-    # laadt het scherm aan het eind van het spel wanneer de speler verliest 
-    :param win: the pygame window surface
-    :return: None
-    """
-    run = True
-    text_label = END_FONT.render("Press Space to Restart", 1, (255,255,255))
-    while run:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                run = False
+    def end_screen(win):
+        """
+        # laadt het scherm aan het eind van het spel wanneer de speler verliest 
+        :param win: the pygame window surface
+        :return: None
+        """
+        run = True
+        text_label = END_FONT.render("Press Space to Restart", 1, (255,255,255))
+        while run:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    run = False
 
-            if event.type == pygame.KEYDOWN:
-                main(win)
+                if event.type == pygame.KEYDOWN:
+                    main(win)
 
-        win.blit(text_label, (WIN_WIDTH/2 - text_label.get_width()/2, 500))
+            win.blit(text_label, (WIN_WIDTH/2 - text_label.get_width()/2, 500))
+            pygame.display.update()
+
+        pygame.quit()
+        quit()
+
+    def draw_window(win, bird, pipes, base, score):
+        """
+        # tekent de windows voor het primaire spel rondje 
+        :param win: pygame window surface
+        :param bird: a Bird object
+        :param pipes: List of pipes
+        :param score: score of the game (int)
+        :return: None
+        """
+        win.blit(bg_img, (0,0))
+    
+        for pipe in pipes:
+            pipe.draw(win)
+
+        base.draw(win)
+        bird.draw(win)
+
+        # score
+        score_label = STAT_FONT.render("Score: " + str(score),1,(255,255,255))
+        win.blit(score_label, (WIN_WIDTH - score_label.get_width() - 15, 10))
+
         pygame.display.update()
 
-    pygame.quit()
-    quit()
 
-def draw_window(win, bird, pipes, base, score):
-    """
-    # tekent de windows voor het primaire spel rondje 
-    :param win: pygame window surface
-    :param bird: a Bird object
-    :param pipes: List of pipes
-    :param score: score of the game (int)
-    :return: None
-    """
-    win.blit(bg_img, (0,0))
+    def main(genomes, config):
+        nets = []
+        ge = []
+        birds = []
 
-    for pipe in pipes:
-        pipe.draw(win)
-
-    base.draw(win)
-    bird.draw(win)
-
-    # score
-    score_label = STAT_FONT.render("Score: " + str(score),1,(255,255,255))
-    win.blit(score_label, (WIN_WIDTH - score_label.get_width() - 15, 10))
-
-    pygame.display.update()
-
-
-def main(genomes, config):
-    nets = []
-    ge = []
-    birds = []
-
-    # Houdt de genomes bij die de birds aanstuurt 
-    for g in genomes: 
-        net = neat.nn.FeedForwardNetwork(g.config)
-        nets.append(net)
-        birds.append(Bird(230, 350))
-        ge.append.(g)
-        g.fitness = 0
+        # Houdt de genomes bij die de birds aanstuurt 
+        for g in genomes: 
+            net = neat.nn.FeedForwardNetwork(g.config)
+            nets.append(net)
+            birds.append(Bird(230, 350))
+            ge.append.(g)
+            g.fitness = 0
     
-    base = Base(FLOOR)
-    pipes = [Pipe(700)]
-    score = 0
+        base = Base(FLOOR)
+        pipes = [Pipe(700)]
+        score = 0
 
-    clock = pygame.time.Clock()
-    start = False
-    lost = False
+        clock = pygame.time.Clock()
+        start = False
+        lost = False
 
-    run = True
-    while run:
-        pygame.time.delay(30)
-        clock.tick(60)
+        run = True
+        while run:
+            pygame.time.delay(30)
+            clock.tick(60)
 
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                run = False
-                pygame.quit()
-                quit()
-                break
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    run = False
+                    pygame.quit()
+                    quit()
+                    break
 
-            if event.type == pygame.KEYDOWN and not lost:
+        if event.type == pygame.KEYDOWN and not lost:
                 if event.key == pygame.K_SPACE:
                     if not start:
                         start = True
@@ -397,20 +397,20 @@ def main(genomes, config):
 
 main(WIN)
 
-# Laadt de config file in 
-def run(config_path): 
-    config = neat.config.Config(neat.DefaultGenome, neat.DefaultReproduction, 
-                                neat.DefaultSpeciesSet, neat.DefaultStagnation, 
-                                config_path)
-    p = neat.Population(config)
+    # Laadt de config file in 
+    def run(config_path): 
+        config = neat.config.Config(neat.DefaultGenome, neat.DefaultReproduction, 
+                                    neat.DefaultSpeciesSet, neat.DefaultStagnation, 
+                                    config_path)
+        p = neat.Population(config)
+    
+        p.add_repoter(neat.StdOutReporter(True))
+        stats = neat.StatisticsReporter()
+        p.add_reporter(stats) 
 
-    p.add_repoter(neat.StdOutReporter(True))
-    stats = neat.StatisticsReporter()
-    p.add_reporter(stats) 
+        winner = p.run(main,50) 
 
-    winner = p.run(main,50) 
-
-if __name__ == "main__":
-    local_dir = os.pass.dirname(__file__)
-    config_path = os.path.join(local_dir, "config-feedforward.txt")
-    run(config_path) 
+    if __name__ == "main__":
+        local_dir = os.pass.dirname(__file__)
+        config_path = os.path.join(local_dir, "config-feedforward.txt")
+        run(config_path) 
