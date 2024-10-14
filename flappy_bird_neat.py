@@ -304,13 +304,14 @@ class Base:
 
     pygame.display.update()
 
-
+  # veranderingen voor de fitness functie 
   def eval_genomes(genomes, config):
      """
      runs the simulation of the current population of
      birds and sets their fitness based on the distance they
      reach in the game.
      """
+     global WIN, gen 
      win = WIN
      gen += 1
     
@@ -320,12 +321,20 @@ class Base:
      nets = []
      birds = []
      ge = []
-  for genome_id, genome in genomes:
+      
+# for genome_id, genome in genomes:
         genome.fitness = 0                          # start met een fitness van 0
         net = neat.nn.FeedForwardNetwork.create(genome, config)
         nets.append(net)
         birds.append(Bird(230,350))
         ge.append(genome)
+
+# de fitness van elke vogel wordt bekeken 
+   with open('best.pickle', 'rb') as handle:
+        net=pickle.load(handle)
+    nets.append(net)
+    birds.append(Bird(230,350))
+    
 
     base = Base(FLOOR)
     pipes = [Pipe(700)]
