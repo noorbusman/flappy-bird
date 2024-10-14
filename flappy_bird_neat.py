@@ -305,7 +305,7 @@ class Base:
     pygame.display.update()
 
   #3 veranderingen voor de fitness functie 
-  def eval_genomes(genomes, config):
+  def eval_genomes(genomes, config)
      """
      runs the simulation of the current population of
      birds and sets their fitness based on the distance they
