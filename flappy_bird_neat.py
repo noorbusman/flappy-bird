@@ -34,7 +34,7 @@ gen = 0
 
 class Bird:
     """
-    Bird class representing the flappy bird
+    # Bird class vertegenwoordigd de flappy bird
     """
     MAX_ROTATION = 25
     IMGS = bird_images
@@ -68,15 +68,15 @@ class Bird:
 
     def move(self):
         """
-        make the bird move
+        # beweegt de bird 
         :return: None
         """
         self.tick_count += 1
 
-        # for downward acceleration
+        # voor neerwaardse versnelling 
         displacement = self.vel*(self.tick_count) + 0.5*(3)*(self.tick_count)**2  # calculate displacement
 
-        # terminal velocity
+        # eindsnelheid 
         if displacement >= 16:
             displacement = (displacement/abs(displacement)) * 16
 
@@ -94,13 +94,13 @@ class Bird:
 
     def draw(self, win):
         """
-        draw the bird
+        # teken de bird
         :param win: pygame window or surface
         :return: None
         """
         self.img_count += 1
 
-        # For animation of bird, loop through three images
+        # voor animatie van de bird, ren door drie frames 
         if self.img_count <= self.ANIMATION_TIME:
             self.img = self.IMGS[0]
         elif self.img_count <= self.ANIMATION_TIME*2:
