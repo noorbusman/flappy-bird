@@ -320,7 +320,6 @@ class Base:
             net = neat.nn.FeedForwardNetwork.create(g, config)
             nets.append(net)
             birds.append(Bird(230, 350))
-            ge.append.(g)
             g.fitness = 0
     
         base = Base(FLOOR)
