@@ -343,7 +343,7 @@ def eval_genomes(genomes, config):
             if event.type == pygame.QUIT:
                 run = False
                 pygame.quit()
-                quit()                 # zorgt ervoor dat niet alleen "loop" stopt maar spel stopt
+                quit()                              # zorgt ervoor dat niet alleen "loop" stopt maar spel stopt
 
                 break
 
@@ -354,10 +354,10 @@ def eval_genomes(genomes, config):
         else: 
             run: False
             break 
-# deze "else" zorgt ervoor dat als er geen vogeltjes zijn het spel stopt
+                                                    # deze "else" zorgt ervoor dat als er geen vogeltjes zijn het spel stopt
 
         
-        for x, bird in enumerate(birds):       # geeft vogeltje 0.1 fitness omdat het weer een frame verder is
+        for x, bird in enumerate(birds):            # geeft vogeltje 0.1 fitness omdat het weer een frame verder is
             bird.move()
             ge[x].fitness += 0.1
  
@@ -407,13 +407,13 @@ def eval_genomes(genomes, config):
 
         draw_window(WIN, birds, pipes, base, score, gen, pipe_ind)     # laat score, hoeveelheid vogels, en gen zien
 
-        # eindig loop na score van 25
+                                                                       # eindig loop na score van 25
         if score > 25:
-      #???      pickle.dump(nets[0],open("best.pickle", "wb"))    # kiest "winner" voor pickle
+                                                                       #???      pickle.dump(nets[0],open("best.pickle", "wb"))    # kiest "winner" voor pickle
             break   #stopt de loop
 
-#??? with open('winner.pickle', 'wb') as f:
- #????    pickle.dump(winner,f)
+                                                                        #??? with open('winner.pickle', 'wb') as f:
+                                                                        #????    pickle.dump(winner,f)
 
 def pickle(myData.pkl)
 
