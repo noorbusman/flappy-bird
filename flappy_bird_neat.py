@@ -329,7 +329,7 @@ class Base:
         birds.append(Bird(230,350))
         ge.append(genome)
 
-#4 de fitness van elke vogel wordt bekeken 
+#4 de fitness van elke vogel wordt bekeken, hier zit de pickel maar die hebben we niet kunnen trainen vanwege en error 
    with open('best.pickle', 'rb') as handle:
         net=pickle.load(handle)
     nets.append(net)
