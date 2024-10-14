@@ -315,8 +315,8 @@ class Base:
         birds = []
 
         # Houdt de genomes bij die de birds aanstuurt 
-        for g, in genomes: 
-            net = neat.nn.FeedForwardNetwork(g.config)
+        for g in genomes: 
+            net = neat.nn.FeedForwardNetwork(g, config)
             nets.append(net)
             birds.append(Bird(230, 350))
             ge.append.(g)
