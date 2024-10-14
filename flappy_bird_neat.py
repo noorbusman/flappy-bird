@@ -270,7 +270,7 @@ class Base:
       :param score: score of the game (int)    	    	                
       :param gen: current generation
       :param pipe_ind: index of closest pipe
-       """
+      """
        if gen == 0:
           gen = 1
          win.blit(bg_img, (0,0))
