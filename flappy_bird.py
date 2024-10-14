@@ -169,11 +169,11 @@ class Pipe():
 
     def draw(self, win):
         """
-        draw both the top and bottom of the pipe
+        # tekent de bovenkant en onderkant van de pipe
         :param win: pygame window/surface
         :return: None
         """
-        # draw top
+        # teken bovenkant 
         win.blit(self.PIPE_TOP, (self.x, self.top))
         # draw bottom
         win.blit(self.PIPE_BOTTOM, (self.x, self.bottom))
@@ -181,7 +181,7 @@ class Pipe():
 
     def collide(self, bird, win):
         """
-        returns if a point is colliding with the pipe
+        # komt terug als een point in aanraking komt met een pipe
         :param bird: Bird object
         :return: Bool
         """
@@ -201,7 +201,7 @@ class Pipe():
 
 class Base:
     """
-    Represnts the moving floor of the game
+    # vertegenwoordigd de bewegende vloer van het spel 
     """
     VEL = 5
     WIN_WIDTH = WIN_WIDTH
@@ -210,7 +210,7 @@ class Base:
 
     def __init__(self, y):
         """
-        Initialize the object
+        # start het object 
         :param y: int
         :return: None
         """
@@ -220,7 +220,7 @@ class Base:
 
     def move(self):
         """
-        move floor so it looks like its scrolling
+        # beweegt de vloer zodat het lijkt op scrollen 
         :return: None
         """
         self.x1 -= self.VEL
@@ -233,7 +233,7 @@ class Base:
 
     def draw(self, win):
         """
-        Draw the floor. This is two images that move together.
+        # tekent de vloer, het zijn twee tekeningen die samen bewegen 
         :param win: the pygame surface/window
         :return: None
         """
@@ -243,7 +243,7 @@ class Base:
 
 def blitRotateCenter(surf, image, topleft, angle):
     """
-    Rotate a surface and blit it to the window
+    # kantelt een oppervlak en het blijft bij de window
     :param surf: the surface to blit to
     :param image: the image surface to rotate
     :param topLeft: the top left position of the image
@@ -257,7 +257,7 @@ def blitRotateCenter(surf, image, topleft, angle):
 
 def menu_screen(win):
     """
-    the menu screen that will start the game
+    # het menu scherm begint het spel
     :param win: the pygame window surface
     :return: None
     """
@@ -265,7 +265,7 @@ def menu_screen(win):
 
 def end_screen(win):
     """
-    display an end screen when the player loses
+    # laadt het scherm aan het eind van het spel wanneer de speler verliest 
     :param win: the pygame window surface
     :return: None
     """
@@ -287,7 +287,7 @@ def end_screen(win):
 
 def draw_window(win, bird, pipes, base, score):
     """
-    draws the windows for the main game loop
+    # tekent de windows voor het primaire spel rondje 
     :param win: pygame window surface
     :param bird: a Bird object
     :param pipes: List of pipes
